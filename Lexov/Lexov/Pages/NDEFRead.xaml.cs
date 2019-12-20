@@ -56,12 +56,15 @@ namespace Lexov.Pages
             uxNDEFStack.Children.Add(uxNDEFEditor);
         }
 
-        void uxRefreshButton_Clicked(object sender, EventArgs e)
+        async void uxRefreshButton_Clicked(object sender, EventArgs e)
         {
-            uxNDEFStack.Children.Remove(uxNDEFEditor);
-            uxButtonStack.IsVisible = false;
-            lblNFCIcon.IsVisible = true;
-            lblScanMessage.IsVisible = true;
+            if (await DisplayAlert("Confirm", "Are you sure you want to clear the current NDEF record?", "Yes", "No"))
+            {
+                uxNDEFStack.Children.Remove(uxNDEFEditor);
+                uxButtonStack.IsVisible = false;
+                lblNFCIcon.IsVisible = true;
+                lblScanMessage.IsVisible = true;
+            }
         }
     }
 }
