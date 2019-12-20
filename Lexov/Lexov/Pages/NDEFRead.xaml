@@ -8,24 +8,78 @@
              NavigationPage.HasNavigationBar="False"
              x:Class="Lexov.Pages.NDEFRead">
     <ContentPage.Content>
-        <StackLayout
-            x:Name="uxBaseStack">
-            <ScrollView>
+        <Grid
+            x:Name="uxBaseGrid">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <ScrollView
+                x:Name="uxNDEFScroll"
+                IsVisible="False"
+                Grid.Row="0"
+                Grid.Column="0"
+                Grid.ColumnSpan="2"
+                Grid.RowSpan="3">
                 <StackLayout
-                    x:Name="uxNDEFStack">
+                    x:Name="uxNDEFStack"
+                    VerticalOptions="Fill">
+                    <Editor
+                        x:Name="uxNDEFEditor"
+                        TextColor="White"/>
                 </StackLayout>
             </ScrollView>
             <Image
                 x:Name="lblNFCIcon"
+                Grid.Row="0"
+                Grid.Column="0"
+                Grid.ColumnSpan="2"
                 HorizontalOptions="Start"
                 Scale=".50"
                 Source="NFC_logo"/>
             <Label
                 x:Name="lblScanMessage"
+                Grid.Row="1"
+                Grid.Column="0"
+                Grid.ColumnSpan="2"
                 HorizontalOptions="Center"
                 FontFamily="{StaticResource NormalFont}"
                 Text="Scan NFC tag with text NDEF record"
                 TextColor="White"/>
-        </StackLayout>
+            <StackLayout
+                x:Name="uxButtonStack"
+                Grid.Row="2"
+                Grid.Column="1"
+                IsVisible="False"
+                VerticalOptions="EndAndExpand"
+                BackgroundColor="Transparent"
+                Spacing="-6"
+                Padding="0"
+                Orientation="Horizontal">
+                <ImageButton
+                    x:Name="uxWriteButton"
+                    Margin="0"
+                    Source="nfcWrite"
+                    BackgroundColor="#F0D200"
+                    Padding="25"
+                    WidthRequest="100"
+                    HeightRequest="100"
+                    HorizontalOptions="EndAndExpand"/>
+                <ImageButton
+                    x:Name="uxRefreshButton"
+                    Margin="0"
+                    Source="refresh"
+                    BackgroundColor="#B2B1B6"
+                    Padding="25"
+                    WidthRequest="100"
+                    HeightRequest="100"
+                    HorizontalOptions="End"/>
+            </StackLayout>
+        </Grid>
     </ContentPage.Content>
 </ContentPage>

@@ -17,13 +17,13 @@ namespace Lexov.Pages
     public partial class NDEFRead : ContentPage
     {
         private readonly INfcForms device;
-        private Editor uxNDEFEditor;
         public NDEFRead()
         {
             InitializeComponent();
 
             device = DependencyService.Get<INfcForms>();
             device.NewTag += HandleNewTag;
+            uxRefreshButton.Clicked += uxRefreshButton_Clicked;
         }
 
         private string readNDEFMessage(NdefMessage message)
@@ -40,16 +40,22 @@ namespace Lexov.Pages
 
         void HandleNewTag(object sender, NfcFormsTag e)
         {
-            uxNDEFEditor = new Editor
-            {
-                TextColor = Color.White
-            };
+            uxNDEFScroll.IsVisible = true;
+            uxNDEFScroll.ScrollToAsync(0,0, false);
             lblNFCIcon.IsVisible = false;
             lblScanMessage.IsVisible = false;
+            uxButtonStack.IsVisible = true;
 
             string readNDEF = readNDEFMessage(e.NdefMessage);
             uxNDEFEditor.Text = readNDEF;
-            uxNDEFStack.Children.Add(uxNDEFEditor);
+        }
+
+        void uxRefreshButton_Clicked(object sender, EventArgs e)
+        {
+            uxButtonStack.IsVisible = false;
+            uxNDEFScroll.IsVisible = false;
+            lblNFCIcon.IsVisible = true;
+            lblScanMessage.IsVisible = true;
         }
     }
 }
