@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             BackgroundColor="Black"
+             NavigationPage.HasNavigationBar="False"
+             x:Class="Lexov.Pages.NDEFRead">
+    <ContentPage.Content>
+        <StackLayout
+            x:Name="uxBaseStack">
+            <ScrollView>
+                <StackLayout
+                    x:Name="uxNDEFStack">
+                </StackLayout>
+            </ScrollView>
+            <Image
+                x:Name="lblNFCIcon"
+                HorizontalOptions="Start"
+                Scale=".50"
+                Source="NFC_logo"/>
+            <Label
+                x:Name="lblScanMessage"
+                HorizontalOptions="Center"
+                FontFamily="{StaticResource NormalFont}"
+                Text="Scan NFC tag with text NDEF record"
+                TextColor="White"/>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
