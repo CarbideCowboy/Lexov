@@ -16,6 +16,7 @@ namespace Lexov.Pages
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class NDEFRead : ContentPage
     {
+        private Editor uxNDEFEditor;
         private readonly INfcForms device;
         public NDEFRead()
         {
@@ -40,20 +41,25 @@ namespace Lexov.Pages
 
         void HandleNewTag(object sender, NfcFormsTag e)
         {
-            uxNDEFScroll.IsVisible = true;
-            uxNDEFScroll.ScrollToAsync(0,0, false);
             lblNFCIcon.IsVisible = false;
             lblScanMessage.IsVisible = false;
+
             uxButtonStack.IsVisible = true;
+
+            uxNDEFEditor = new Editor()
+            {
+                TextColor = Color.White
+            };
 
             string readNDEF = readNDEFMessage(e.NdefMessage);
             uxNDEFEditor.Text = readNDEF;
+            uxNDEFStack.Children.Add(uxNDEFEditor);
         }
 
         void uxRefreshButton_Clicked(object sender, EventArgs e)
         {
+            uxNDEFStack.Children.Remove(uxNDEFEditor);
             uxButtonStack.IsVisible = false;
-            uxNDEFScroll.IsVisible = false;
             lblNFCIcon.IsVisible = true;
             lblScanMessage.IsVisible = true;
         }
