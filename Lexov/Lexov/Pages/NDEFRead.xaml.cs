@@ -18,6 +18,7 @@ namespace Lexov.Pages
     {
         private Editor uxNDEFEditor;
         private readonly INfcForms device;
+        private double previousScrollPosition = 0;
         public NDEFRead()
         {
             InitializeComponent();
@@ -25,6 +26,35 @@ namespace Lexov.Pages
             device = DependencyService.Get<INfcForms>();
             device.NewTag += HandleNewTag;
             uxRefreshButton.Clicked += uxRefreshButton_Clicked;
+            uxNDEFScroll.Scrolled += uxNDEFScroll_Scrolled;
+        }
+
+        private async void uxNDEFScroll_Scrolled(object sender, ScrolledEventArgs e)
+        {
+            if(previousScrollPosition < e.ScrollY)
+            {
+                hideButtons();
+                previousScrollPosition = e.ScrollY;
+            }
+
+            else if(previousScrollPosition > e.ScrollY)
+            {
+                showButtons();
+                previousScrollPosition = e.ScrollY;
+            }
+        }
+
+        private async void hideButtons()
+        {
+            await uxButtonStack.FadeTo(0, 100);
+            await Task.Delay(100);
+            uxButtonStack.IsVisible = false;
+        }
+
+        private void showButtons()
+        {
+            uxButtonStack.FadeTo(1, 100);
+            uxButtonStack.IsVisible = true;
         }
 
         private string readNDEFMessage(NdefMessage message)
