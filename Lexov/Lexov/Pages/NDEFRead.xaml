@@ -13,7 +13,6 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
@@ -28,31 +27,10 @@
                 <StackLayout
                     x:Name="uxNDEFStack"/>
             </ScrollView>
-            <Image
-                x:Name="lblNFCIcon"
-                Grid.Row="0"
-                Grid.RowSpan="2"
-                Grid.Column="0"
-                Grid.ColumnSpan="2"
-                HorizontalOptions="Center"
-                VerticalOptions="Center"
-                Scale=".50"
-                Source="NFC_logo"/>
-            <Label
-                x:Name="lblScanMessage"
-                Grid.Row="1"
-                Grid.Column="0"
-                Grid.ColumnSpan="2"
-                HorizontalOptions="Center"
-                VerticalOptions="Center"
-                FontFamily="{StaticResource NormalFont}"
-                Text="Scan NFC tag with text NDEF record"
-                TextColor="White"/>
             <StackLayout
                 x:Name="uxButtonStack"
                 Grid.Row="2"
                 Grid.Column="1"
-                IsVisible="False"
                 VerticalOptions="EndAndExpand"
                 BackgroundColor="Transparent"
                 Spacing="-6"

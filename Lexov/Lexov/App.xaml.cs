@@ -10,7 +10,7 @@ namespace Lexov
         {
             InitializeComponent();
 
-            MainPage = new NavigationPage(new Pages.NDEFRead());
+            MainPage = new NavigationPage(new Pages.ScanPrompt());
         }
 
         protected override void OnStart()

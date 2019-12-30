@@ -17,19 +17,26 @@ namespace Lexov.Pages
     public partial class NDEFRead : ContentPage
     {
         private Editor uxNDEFEditor;
-        private readonly INfcForms device;
         private double previousScrollPosition = 0;
-        public NDEFRead()
+        private string NDEFMessage;
+        public NDEFRead(string NDEFPayload)
         {
             InitializeComponent();
 
-            device = DependencyService.Get<INfcForms>();
-            device.NewTag += HandleNewTag;
+            NDEFMessage = NDEFPayload;
             uxRefreshButton.Clicked += uxRefreshButton_Clicked;
             uxNDEFScroll.Scrolled += uxNDEFScroll_Scrolled;
+
+            uxNDEFEditor = new Editor()
+            {
+                TextColor = Color.White
+            };
+
+            uxNDEFEditor.Text = NDEFMessage;
+            uxNDEFStack.Children.Add(uxNDEFEditor);
         }
 
-        private async void uxNDEFScroll_Scrolled(object sender, ScrolledEventArgs e)
+        private void uxNDEFScroll_Scrolled(object sender, ScrolledEventArgs e)
         {
             if(previousScrollPosition < e.ScrollY)
             {
@@ -51,49 +58,17 @@ namespace Lexov.Pages
             uxButtonStack.IsVisible = false;
         }
 
-        private void showButtons()
+        private async void showButtons()
         {
-            uxButtonStack.FadeTo(1, 100);
+            await uxButtonStack.FadeTo(1, 100);
             uxButtonStack.IsVisible = true;
-        }
-
-        private string readNDEFMessage(NdefMessage message)
-        {
-            if(message == null)
-            {
-                return "Tag is empty";
-            }
-
-            NdefTextRecord record = new NdefTextRecord(message.ElementAtOrDefault(0));
-
-            return record.Text;
-        }
-
-        void HandleNewTag(object sender, NfcFormsTag e)
-        {
-            lblNFCIcon.IsVisible = false;
-            lblScanMessage.IsVisible = false;
-
-            uxButtonStack.IsVisible = true;
-
-            uxNDEFEditor = new Editor()
-            {
-                TextColor = Color.White
-            };
-
-            string readNDEF = readNDEFMessage(e.NdefMessage);
-            uxNDEFEditor.Text = readNDEF;
-            uxNDEFStack.Children.Add(uxNDEFEditor);
         }
 
         async void uxRefreshButton_Clicked(object sender, EventArgs e)
         {
             if (await DisplayAlert("Confirm", "Are you sure you want to clear the current NDEF record?", "Yes", "No"))
             {
-                uxNDEFStack.Children.Remove(uxNDEFEditor);
-                uxButtonStack.IsVisible = false;
-                lblNFCIcon.IsVisible = true;
-                lblScanMessage.IsVisible = true;
+                await Navigation.PopAsync();
             }
         }
     }
