@@ -1,4 +1,5 @@
-﻿using NdefLibrary.Ndef;
+﻿using Lexov.Utilities;
+using NdefLibrary.Ndef;
 using Poz1.NFCForms.Abstract;
 using System;
 using System.Collections.Generic;
@@ -22,6 +23,7 @@ namespace Lexov.Pages
         public NDEFRead(string NDEFPayload)
         {
             InitializeComponent();
+            DependencyService.Get<IOrientationHandler>().ForcePortrait();
 
             NDEFMessage = NDEFPayload;
             uxRefreshButton.Clicked += uxRefreshButton_Clicked;

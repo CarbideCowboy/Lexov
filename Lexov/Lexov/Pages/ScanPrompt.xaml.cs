@@ -1,4 +1,5 @@
-﻿using Poz1.NFCForms.Abstract;
+﻿using Lexov.Utilities;
+using Poz1.NFCForms.Abstract;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,6 +18,7 @@ namespace Lexov.Pages
         public ScanPrompt()
         {
             InitializeComponent();
+            DependencyService.Get<IOrientationHandler>().ForcePortrait();
 
             device = DependencyService.Get<INfcForms>();
             device.NewTag += HandleNewTag;

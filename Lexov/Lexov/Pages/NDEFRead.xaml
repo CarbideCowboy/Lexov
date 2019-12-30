@@ -41,18 +41,18 @@
                     Margin="0"
                     Source="nfcWrite"
                     BackgroundColor="#F0D200"
-                    Padding="25"
-                    WidthRequest="100"
-                    HeightRequest="100"
+                    Padding="20"
+                    WidthRequest="80"
+                    HeightRequest="80"
                     HorizontalOptions="EndAndExpand"/>
                 <ImageButton
                     x:Name="uxRefreshButton"
                     Margin="0"
                     Source="refresh"
                     BackgroundColor="#B2B1B6"
-                    Padding="25"
-                    WidthRequest="100"
-                    HeightRequest="100"
+                    Padding="20"
+                    WidthRequest="80"
+                    HeightRequest="80"
                     HorizontalOptions="End"/>
             </StackLayout>
         </Grid>
