@@ -19,14 +19,15 @@ namespace Lexov.Pages
     {
         private Editor uxNDEFEditor;
         private double previousScrollPosition = 0;
-        private string NDEFMessage;
+        private string ndefPayloadRead;
         public NDEFRead(string NDEFPayload)
         {
             InitializeComponent();
             DependencyService.Get<IOrientationHandler>().ForcePortrait();
 
-            NDEFMessage = NDEFPayload;
+            ndefPayloadRead = NDEFPayload;
             uxRefreshButton.Clicked += uxRefreshButton_Clicked;
+            uxWriteButton.Clicked += uxWriteButton_Clicked;
             uxNDEFScroll.Scrolled += uxNDEFScroll_Scrolled;
 
             uxNDEFEditor = new Editor()
@@ -34,8 +35,14 @@ namespace Lexov.Pages
                 TextColor = Color.White
             };
 
-            uxNDEFEditor.Text = NDEFMessage;
+            uxNDEFEditor.Text = ndefPayloadRead;
             uxNDEFStack.Children.Add(uxNDEFEditor);
+        }
+
+        void uxWriteButton_Clicked(object sender, EventArgs e)
+        {
+            var ndefMessage = Utilities.NDEFHandler.makeTextNDEFRecord(uxNDEFEditor.Text);
+            Navigation.PushAsync(new Pages.NDEFWrite(ndefMessage));
         }
 
         private void uxNDEFScroll_Scrolled(object sender, ScrolledEventArgs e)

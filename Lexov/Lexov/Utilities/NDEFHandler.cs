@@ -19,5 +19,12 @@ namespace Lexov.Utilities
 
             return record.Text;
         }
+
+        public static NdefMessage makeTextNDEFRecord(string NDEFPayload)
+        {
+            byte[] bytes = Encoding.ASCII.GetBytes(NDEFPayload);
+            var ndefMessage = NdefMessage.FromByteArray(bytes);
+            return ndefMessage;
+        }
     }
 }
