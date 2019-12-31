@@ -26,7 +26,7 @@ namespace Lexov.Pages
             DependencyService.Get<IOrientationHandler>().ForcePortrait();
 
             ndefPayloadRead = NDEFPayload;
-            uxRefreshButton.Clicked += uxRefreshButton_Clicked;
+            uxClearButton.Clicked += uxClearButton_Clicked;
             uxWriteButton.Clicked += uxWriteButton_Clicked;
             uxNDEFScroll.Scrolled += uxNDEFScroll_Scrolled;
 
@@ -73,7 +73,7 @@ namespace Lexov.Pages
             uxButtonStack.IsVisible = true;
         }
 
-        async void uxRefreshButton_Clicked(object sender, EventArgs e)
+        async void uxClearButton_Clicked(object sender, EventArgs e)
         {
             if (await DisplayAlert("Confirm", "Are you sure you want to clear the current NDEF record?", "Yes", "No"))
             {

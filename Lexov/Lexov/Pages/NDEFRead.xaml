@@ -46,9 +46,9 @@
                     HeightRequest="80"
                     HorizontalOptions="EndAndExpand"/>
                 <ImageButton
-                    x:Name="uxRefreshButton"
+                    x:Name="uxClearButton"
                     Margin="0"
-                    Source="refresh"
+                    Source="clear"
                     BackgroundColor="#B2B1B6"
                     Padding="20"
                     WidthRequest="80"
