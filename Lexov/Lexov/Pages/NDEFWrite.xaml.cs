@@ -30,7 +30,10 @@ namespace Lexov.Pages
 
         private void HandleNewTag(object sender, NfcFormsTag e)
         {
-            device.WriteTag(ndefMessage);
+            if(Navigation.NavigationStack.Count == 3)
+            {
+                device.WriteTag(ndefMessage);
+            }
         }
     }
 }

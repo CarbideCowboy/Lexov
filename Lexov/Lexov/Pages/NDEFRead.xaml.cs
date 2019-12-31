@@ -32,7 +32,8 @@ namespace Lexov.Pages
 
             uxNDEFEditor = new Editor()
             {
-                TextColor = Color.White
+                TextColor = Color.White,
+                VerticalOptions = LayoutOptions.FillAndExpand
             };
 
             uxNDEFEditor.Text = ndefPayloadRead;

@@ -12,24 +12,27 @@
             x:Name="uxBaseGrid">
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <ScrollView
-                x:Name="uxNDEFScroll"
+            <StackLayout
                 Grid.Row="0"
                 Grid.Column="0"
                 Grid.ColumnSpan="2"
-                Grid.RowSpan="3">
-                <StackLayout
-                    x:Name="uxNDEFStack"/>
-            </ScrollView>
+                Grid.RowSpan="2">
+                <ScrollView
+                    x:Name="uxNDEFScroll"
+                    VerticalOptions="FillAndExpand">
+                    <StackLayout
+                        x:Name="uxNDEFStack"/>
+                </ScrollView>
+            </StackLayout>
             <StackLayout
                 x:Name="uxButtonStack"
-                Grid.Row="2"
+                Grid.Row="1"
                 Grid.Column="1"
                 VerticalOptions="EndAndExpand"
                 BackgroundColor="Transparent"
