@@ -28,11 +28,20 @@ namespace Lexov.Pages
             ndefMessage = NDEFPayload;
         }
 
-        private void HandleNewTag(object sender, NfcFormsTag e)
+        private async void HandleNewTag(object sender, NfcFormsTag e)
         {
             if(Navigation.NavigationStack.Count == 3)
             {
-                device.WriteTag(ndefMessage);
+                try
+                {
+                    device.WriteTag(ndefMessage);
+                    await DisplayAlert("Success", "NDEF write operation successful", "OK");
+                }
+
+                catch
+                {
+                    await DisplayAlert("Error", "NDEF write operation unsuccessful", "OK");
+                }
             }
         }
     }
