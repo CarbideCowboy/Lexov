@@ -22,11 +22,20 @@ namespace Lexov.Pages
 
             device = DependencyService.Get<INfcForms>();
             device.NewTag += HandleNewTag;
+            uxBlankButton.Clicked += uxBlankButton_Clicked;
+        }
+
+        private void uxBlankButton_Clicked(object sender, EventArgs e)
+        {
+            Navigation.PushAsync(new Pages.NDEFRead(""));
         }
 
         private void HandleNewTag(object sender, NfcFormsTag e)
         {
-            Navigation.PushAsync(new Pages.NDEFRead(Utilities.NDEFHandler.readNDEFPlainText(e.NdefMessage)));
+            if(Navigation.NavigationStack.Count == 1)
+            {
+                Navigation.PushAsync(new Pages.NDEFRead(Utilities.NDEFHandler.readNDEFPlainText(e.NdefMessage)));
+            }
         }
     }
 }

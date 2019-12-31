@@ -80,5 +80,10 @@ namespace Lexov.Pages
                 await Navigation.PopAsync();
             }
         }
+
+        protected override bool OnBackButtonPressed()
+        {
+            return true;
+        }
     }
 }

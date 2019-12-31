@@ -17,6 +17,20 @@
                 Text="Scan NFC tag with text NDEF record"
                 TextColor="White"
                 HorizontalOptions="Center"/>
+            <StackLayout
+                VerticalOptions="EndAndExpand"
+                Orientation="Horizontal">
+                <ImageButton
+                    x:Name="uxBlankButton"
+                    Margin="15"
+                    Source="plus"
+                    BackgroundColor="#36BA86"
+                    Padding="15"
+                    WidthRequest="60"
+                    HeightRequest="60"
+                    CornerRadius="40"
+                    HorizontalOptions="EndAndExpand"/>
+            </StackLayout>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

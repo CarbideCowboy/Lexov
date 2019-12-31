@@ -22,8 +22,13 @@ namespace Lexov.Utilities
 
         public static NdefMessage makeTextNDEFRecord(string NDEFPayload)
         {
-            byte[] bytes = Encoding.ASCII.GetBytes(NDEFPayload);
-            var ndefMessage = NdefMessage.FromByteArray(bytes);
+            var ndefRecord = new NdefTextRecord()
+            {
+                Text = NDEFPayload
+            };
+
+            NdefMessage ndefMessage = new NdefMessage();
+            ndefMessage.Add(ndefRecord);
             return ndefMessage;
         }
     }

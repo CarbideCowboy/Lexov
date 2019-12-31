@@ -10,7 +10,7 @@
     <ContentPage.Content>
         <StackLayout>
             <Image
-                Source="NFC_logo"
+                Source="NFC_logo_yellow"
                 Scale=".5"/>
             <Label
                 FontFamily="{StaticResource NormalFont}"
