@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Xamarin.Forms;
 
 namespace Lexov.Utilities
 {
@@ -10,6 +11,11 @@ namespace Lexov.Utilities
     {
         public static string readNDEFPlainText(NdefMessage message)
         {
+            if(message.Count > 1 || !(message.ElementAtOrDefault(0).CheckSpecializedType(false) == typeof(NdefTextRecord)))
+            {
+                MessagingCenter.Send<NdefMessage>(message, "RecordIncompatible");
+                return "Error reading tag";
+            }
             if(message == null)
             {
                 return "Tag is empty";
