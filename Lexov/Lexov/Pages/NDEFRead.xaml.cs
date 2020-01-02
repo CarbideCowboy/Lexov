@@ -17,7 +17,7 @@ namespace Lexov.Pages
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class NDEFRead : ContentPage
     {
-        private Editor uxNDEFEditor;
+        private Renderers.ExpandableEditor uxNDEFEditor;
         private double previousScrollPosition = 0;
         private string ndefPayloadRead;
         public NDEFRead(string NDEFPayload)
@@ -30,7 +30,7 @@ namespace Lexov.Pages
             uxWriteButton.Clicked += uxWriteButton_Clicked;
             uxNDEFScroll.Scrolled += uxNDEFScroll_Scrolled;
 
-            uxNDEFEditor = new Editor()
+            uxNDEFEditor = new Renderers.ExpandableEditor()
             {
                 TextColor = Color.White,
                 VerticalOptions = LayoutOptions.FillAndExpand
