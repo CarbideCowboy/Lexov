@@ -33,7 +33,8 @@ namespace Lexov.Pages
             uxNDEFEditor = new Renderers.ExpandableEditor()
             {
                 TextColor = Color.White,
-                VerticalOptions = LayoutOptions.FillAndExpand
+                VerticalOptions = LayoutOptions.FillAndExpand,
+                FontFamily = (OnPlatform<string>)Application.Current.Resources["NormalFont"]
             };
 
             uxNDEFEditor.Text = ndefPayloadRead;
