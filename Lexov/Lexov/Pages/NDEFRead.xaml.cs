@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using Xamarin.Essentials;
 
 namespace Lexov.Pages
 {
@@ -24,6 +25,8 @@ namespace Lexov.Pages
         {
             InitializeComponent();
             DependencyService.Get<IOrientationHandler>().ForcePortrait();
+
+            checkEncrypted(NDEFPayload);
 
             ndefPayloadRead = NDEFPayload;
             uxClearButton.Clicked += uxClearButton_Clicked;
@@ -39,6 +42,28 @@ namespace Lexov.Pages
 
             uxNDEFEditor.Text = ndefPayloadRead;
             uxNDEFStack.Children.Add(uxNDEFEditor);
+        }
+
+        async void checkEncrypted(string NDEFPayload)
+        {
+            if (NDEFPayload.Length < 27)
+            {
+                return;
+            }
+
+            else if (!NDEFPayload.Substring(0, 27).Equals("-----BEGIN PGP MESSAGE-----"))
+            {
+                return;
+            }
+
+            else
+            {
+                if(await DisplayAlert("PGP ecrypted payload detected","Attempt decryption in OpenKeychain?", "Yes", "No"))
+                {
+                    await Clipboard.SetTextAsync(NDEFPayload);
+                    DependencyService.Get<Utilities.IOpenApp>().OpenExternalApp();
+                }
+            }
         }
 
         void uxWriteButton_Clicked(object sender, EventArgs e)
