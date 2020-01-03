@@ -23,7 +23,7 @@ namespace Lexov.Droid.Utilities
         [Obsolete]
         public void OpenExternalApp()
         {
-            Intent intent = Android.App.Application.Context.PackageManager.GetLaunchIntentForPackage("org.sufficientlysecure.keychain");
+            Intent intent = Android.App.Application.Context.PackageManager.GetLaunchIntentForPackage("org.sufficientlysecure.keychain.debug");
 
             if(intent != null)
             {
