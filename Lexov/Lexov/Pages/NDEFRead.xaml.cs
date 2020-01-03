@@ -8,7 +8,7 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
-
+using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -28,6 +28,8 @@ namespace Lexov.Pages
             ndefPayloadRead = NDEFPayload;
             uxClearButton.Clicked += uxClearButton_Clicked;
             uxWriteButton.Clicked += uxWriteButton_Clicked;
+            uxCopyButton.Clicked += uxCopyButton_Clicked;
+            uxPasteButton.Clicked += uxPasteButton_Clicked;
             uxNDEFScroll.Scrolled += uxNDEFScroll_Scrolled;
 
             uxNDEFEditor = new Renderers.ExpandableEditor()
@@ -39,6 +41,16 @@ namespace Lexov.Pages
 
             uxNDEFEditor.Text = ndefPayloadRead;
             uxNDEFStack.Children.Add(uxNDEFEditor);
+        }
+
+        async void uxCopyButton_Clicked(object sender, EventArgs e)
+        {
+            await Clipboard.SetTextAsync(ndefPayloadRead);
+        }
+
+        async void uxPasteButton_Clicked(object sender, EventArgs e)
+        {
+            uxNDEFEditor.Text = await Clipboard.GetTextAsync();
         }
 
         void uxWriteButton_Clicked(object sender, EventArgs e)

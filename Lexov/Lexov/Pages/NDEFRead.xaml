@@ -33,29 +33,48 @@
             <StackLayout
                 x:Name="uxButtonStack"
                 Grid.Row="1"
-                Grid.Column="1"
+                Grid.Column="0"
+                Grid.ColumnSpan="2"
                 VerticalOptions="EndAndExpand"
                 BackgroundColor="Transparent"
                 Spacing="-6"
                 Padding="0"
                 Orientation="Horizontal">
                 <ImageButton
+                    x:Name="uxCopyButton"
+                    Margin="0"
+                    Source="archive"
+                    BackgroundColor="#5F1325"
+                    Padding="18"
+                    WidthRequest="75"
+                    HeightRequest="75"
+                    HorizontalOptions="EndAndExpand"/>
+                <ImageButton
+                    x:Name="uxPasteButton"
+                    Margin="0"
+                    Source="unarchive"
+                    BackgroundColor="#0096F0"
+                    Padding="18"
+                    WidthRequest="75"
+                    HeightRequest="75"
+                    HorizontalOptions="End"/>
+                <ImageButton
                     x:Name="uxWriteButton"
                     Margin="0"
                     Source="nfcWrite"
                     BackgroundColor="#F0D200"
-                    Padding="20"
-                    WidthRequest="80"
-                    HeightRequest="80"
-                    HorizontalOptions="EndAndExpand"/>
+                    Padding="18"
+                    WidthRequest="75"
+                    HeightRequest="75"
+                    HorizontalOptions="End"/>
                 <ImageButton
                     x:Name="uxClearButton"
                     Margin="0"
                     Source="clear"
                     BackgroundColor="#B2B1B6"
-                    Padding="20"
-                    WidthRequest="80"
-                    HeightRequest="80"
+                    Padding="18"
+                    WidthRequest="75"
+                    HeightRequest="75"
                     HorizontalOptions="End"/>
             </StackLayout>
         </Grid>
