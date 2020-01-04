@@ -10,6 +10,7 @@ using Android.Nfc;
 using Poz1.NFCForms.Droid;
 using Android.Content;
 using Poz1.NFCForms.Abstract;
+using Lexov.Droid.Utilities;
 
 namespace Lexov.Droid
 {
@@ -27,6 +28,8 @@ namespace Lexov.Droid
 
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
+
+            Xamarin.Forms.DependencyService.Register<OpenAppAndroid>();
 
             NfcManager NfcManager = (NfcManager)Android.App.Application.Context.GetSystemService(Context.NfcService);
             NFCdevice = NfcManager.DefaultAdapter;
