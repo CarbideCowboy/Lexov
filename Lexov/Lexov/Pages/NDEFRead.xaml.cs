@@ -15,6 +15,7 @@ using Xamarin.Forms.Xaml;
 namespace Lexov.Pages
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
+    //goal is to parse what has been read in scanprompt
     public partial class NDEFRead : ContentPage
     {
         private Editor uxNDEFEditor;
