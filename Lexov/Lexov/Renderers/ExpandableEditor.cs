@@ -5,6 +5,8 @@ using Xamarin.Forms;
 
 namespace Lexov.Renderers
 {
+    //modified editor that allows the scroll view to work correctly
+    //when the editor view is full
     public class ExpandableEditor : Editor
     {
         public ExpandableEditor()

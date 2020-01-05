@@ -9,8 +9,10 @@ namespace Lexov.Utilities
 {
     public class NDEFHandler
     {
+        //converts NDEF record to string
         public static string readNDEFPlainText(NdefMessage message)
         {
+            // tag is disqualified if it contains multiple records or if tag is not of plaintext type 
             if(message.Count > 1 || !(message.ElementAtOrDefault(0).CheckSpecializedType(false) == typeof(NdefTextRecord)))
             {
                 MessagingCenter.Send<NdefMessage>(message, "RecordIncompatible");
@@ -21,8 +23,8 @@ namespace Lexov.Utilities
                 return "Tag is empty";
             }
 
+            //conversion takes place
             NdefTextRecord record = new NdefTextRecord(message.ElementAtOrDefault(0));
-
             return record.Text;
         }
 

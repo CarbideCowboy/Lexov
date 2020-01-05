@@ -16,17 +16,20 @@ using Xamarin.Essentials;
 namespace Lexov.Pages
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    //goal is to parse what has been read in scanprompt
+    //displays and handles NDEF string and parses it into editor
+    //gives encryption capability
     public partial class NDEFRead : ContentPage
     {
+        //custom renderer for editor that allows continuous scrolling
         private Renderers.ExpandableEditor uxNDEFEditor;
         private double previousScrollPosition = 0;
         private string ndefPayloadRead;
+
         public NDEFRead(string NDEFPayload)
         {
             InitializeComponent();
             DependencyService.Get<IOrientationHandler>().ForcePortrait();
-
+            //checks if provided NDEF record is encrypted or not
             checkEncrypted(NDEFPayload);
 
             ndefPayloadRead = NDEFPayload;
@@ -69,6 +72,7 @@ namespace Lexov.Pages
 
         void uxWriteButton_Clicked(object sender, EventArgs e)
         {
+            //takes NDEF string and converts it into an NDEF record
             var ndefMessage = Utilities.NDEFHandler.makeTextNDEFRecord(uxNDEFEditor.Text);
             Navigation.PushAsync(new Pages.NDEFWrite(ndefMessage));
         }
@@ -101,6 +105,7 @@ namespace Lexov.Pages
             uxButtonStack.IsVisible = true;
         }
 
+        //navigates back to scan prompt upon user confirmation
         async void uxClearButton_Clicked(object sender, EventArgs e)
         {
             if (await DisplayAlert("Confirm", "Are you sure you want to clear the current NDEF record?", "Yes", "No"))
@@ -109,6 +114,7 @@ namespace Lexov.Pages
             }
         }
 
+        //disables device back button to avoid accidental clearing of a message
         protected override bool OnBackButtonPressed()
         {
             return true;
