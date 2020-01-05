@@ -25,6 +25,8 @@ namespace Lexov.Utilities
 
             //conversion takes place
             NdefTextRecord record = new NdefTextRecord(message.ElementAtOrDefault(0));
+
+            //returns the text of the scanned record
             return record.Text;
         }
 

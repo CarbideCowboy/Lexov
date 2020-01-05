@@ -21,7 +21,7 @@
                 VerticalOptions="EndAndExpand"
                 Orientation="Horizontal">
                 <ImageButton
-                    x:Name="uxBlankButton"
+                    x:Name="uxBlankNDEFButton"
                     Margin="15"
                     Source="plus"
                     BackgroundColor="#36BA86"

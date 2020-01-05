@@ -15,23 +15,26 @@ namespace Lexov.Pages
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class ScanPrompt : ContentPage
     {
+        //instantiates a new NFC tag object
         private readonly INfcForms device;
         public ScanPrompt()
         {
             InitializeComponent();
             DependencyService.Get<IOrientationHandler>().ForcePortrait();
 
+            //activates the physical NFC service of the device
             device = DependencyService.Get<INfcForms>();
             device.NewTag += HandleNewTag;
-            uxBlankButton.Clicked += uxBlankButton_Clicked;
+            uxBlankNDEFButton.Clicked += uxBlankNDEFButton_Clicked;
 
+            //displays a display alert in the case of an unsupported tag being scanned. subscribes from the NDEFHandler class
             MessagingCenter.Subscribe<NdefMessage>(this, "RecordIncompatible", async (sender) =>
             {
                 await DisplayAlert("Error", "Incompatible NDEF record, ensure that your tag's NDEF record is formatted as plain text", "OK");
             });
         }
 
-        private void uxBlankButton_Clicked(object sender, EventArgs e)
+        private void uxBlankNDEFButton_Clicked(object sender, EventArgs e)
         {
             //pushes to NDEF read with blank input
             Navigation.PushAsync(new Pages.NDEFRead(""));
