@@ -16,10 +16,12 @@
                 FontFamily="{StaticResource NormalFont}"
                 Text="Bring NFC tag within range and keep still"
                 TextColor="White"
+                HorizontalTextAlignment="Center"
                 HorizontalOptions="Center"/>
             <Label
                 FontFamily="{StaticResource NormalFont}"
-                Text="This will erase the contents of the tag"
+                HorizontalTextAlignment="Center"
+                Text="This will overwrite the tag's contents"
                 TextColor="#F0D200"
                 HorizontalOptions="Center"/>
         </StackLayout>

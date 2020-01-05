@@ -1,4 +1,5 @@
 ﻿using Lexov.Utilities;
+using NdefLibrary.Ndef;
 using Poz1.NFCForms.Abstract;
 using System;
 using System.Collections.Generic;
@@ -23,6 +24,11 @@ namespace Lexov.Pages
             device = DependencyService.Get<INfcForms>();
             device.NewTag += HandleNewTag;
             uxBlankButton.Clicked += uxBlankButton_Clicked;
+
+            MessagingCenter.Subscribe<NdefMessage>(this, "RecordIncompatible", async (sender) =>
+            {
+                await DisplayAlert("Error", "Incompatible NDEF record, make sure your tag's NDEF record is formatted as plain text", "OK");
+            });
         }
 
         private void uxBlankButton_Clicked(object sender, EventArgs e)

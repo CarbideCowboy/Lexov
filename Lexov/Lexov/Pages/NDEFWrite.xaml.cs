@@ -36,6 +36,19 @@ namespace Lexov.Pages
                 {
                     device.WriteTag(ndefMessage);
                     await DisplayAlert("Success", "NDEF write operation successful", "OK");
+
+                    INavigation navigation = Application.Current.MainPage.Navigation;
+                    Page currentPage = navigation.NavigationStack.ElementAt(navigation.NavigationStack.Count - 1);
+
+                    while(navigation.NavigationStack.ElementAt(0)!=currentPage)
+                    {
+                        navigation.RemovePage(navigation.NavigationStack.ElementAt(0));
+                    }
+
+                    Page scanPromptPage = new ScanPrompt();
+                    navigation.InsertPageBefore(scanPromptPage, currentPage);
+                    await Task.Delay(100);
+                    await navigation.PopAsync();
                 }
 
                 catch
