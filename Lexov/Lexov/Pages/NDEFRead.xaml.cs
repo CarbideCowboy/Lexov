@@ -44,23 +44,27 @@ namespace Lexov.Pages
             uxNDEFStack.Children.Add(uxNDEFEditor);
         }
 
+        //checks if the record string contains a PGP encrypted record
         async void checkEncrypted(string NDEFPayload)
         {
+            //27 is the length of a PGP message header, if the record is smaller than this, it cannot be checked for encryption
             if (NDEFPayload.Length < 27)
             {
                 return;
             }
-
+            //checks if first 27 characters match a PGP header
             else if (!NDEFPayload.Substring(0, 27).Equals("-----BEGIN PGP MESSAGE-----"))
             {
                 return;
             }
-
+            //if encrypted
             else
             {
                 if(await DisplayAlert("PGP ecrypted payload detected","Attempt decryption in OpenKeychain?", "Yes", "No"))
                 {
+                    //copy NDEF record to system clipboard
                     await Clipboard.SetTextAsync(NDEFPayload);
+                    //open the OpenKeychain application
                     DependencyService.Get<Utilities.IOpenApp>().OpenExternalApp();
                 }
             }
@@ -72,14 +76,17 @@ namespace Lexov.Pages
             Navigation.PushAsync(new Pages.NDEFWrite(ndefMessage));
         }
 
+        //handles the button appear/disappear when the editor is larger than the screen
         private void uxNDEFScroll_Scrolled(object sender, ScrolledEventArgs e)
         {
+            //scrolling down
             if(previousScrollPosition < e.ScrollY)
             {
                 hideButtons();
                 previousScrollPosition = e.ScrollY;
             }
 
+            //scrolling up
             else if(previousScrollPosition > e.ScrollY)
             {
                 showButtons();
