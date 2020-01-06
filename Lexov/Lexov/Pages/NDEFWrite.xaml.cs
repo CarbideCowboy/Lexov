@@ -15,6 +15,7 @@ namespace Lexov.Pages
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class NDEFWrite : ContentPage
     {
+        //instantiates a new NFC tag object
         private readonly INfcForms device;
         private NdefMessage ndefMessage;
         public NDEFWrite(NdefMessage NDEFPayload)
@@ -30,13 +31,16 @@ namespace Lexov.Pages
 
         private async void HandleNewTag(object sender, NfcFormsTag e)
         {
+            //ensures that this event logic is only applied on the ndefwrite page
             if(Navigation.NavigationStack.Count == 3)
             {
                 try
                 {
+                    //writes the contents of the ndefread editor
                     device.WriteTag(ndefMessage);
                     await DisplayAlert("Success", "NDEF write operation successful", "OK");
 
+                    //performs the equivilent of popping the navigation stack twice
                     INavigation navigation = Application.Current.MainPage.Navigation;
                     Page currentPage = navigation.NavigationStack.ElementAt(navigation.NavigationStack.Count - 1);
 
