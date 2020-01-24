@@ -40,13 +40,12 @@ namespace Lexov.Pages
             Navigation.PushAsync(new Pages.NDEFRead(""));
         }
 
-        //shows contents of a new tag
         private void HandleNewTag(object sender, NfcFormsTag e)
         {
-            //ensures that event is only called on this scanprompt page
+            //ensures that event is only called on the scanprompt page
             if(Navigation.NavigationStack.Count == 1)
             {
-                //pushes to NDEF read page with converted string representation of a scanned record
+                //pushes to NDEF read page with converted string representation of the scanned record
                 Navigation.PushAsync(new Pages.NDEFRead(Utilities.NDEFHandler.readNDEFPlainText(e.NdefMessage)));
             }
         }

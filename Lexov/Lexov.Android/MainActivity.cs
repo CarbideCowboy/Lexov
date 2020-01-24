@@ -15,6 +15,7 @@ using Lexov.Droid.Utilities;
 namespace Lexov.Droid
 {
     [Activity(Label = "Lexov", Icon = "@drawable/SNC", Theme = "@style/MainTheme", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
+    [IntentFilter(new[] { NfcAdapter.ActionNdefDiscovered }, Categories = new[] { Intent.CategoryDefault }, DataMimeType = "text/plain")]
     public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity
     {
         public NfcAdapter NFCdevice;
